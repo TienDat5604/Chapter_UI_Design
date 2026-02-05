@@ -1,0 +1,48 @@
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h2>Create New Booking</h2>
+    </div>
+    <div style="padding: 1.5rem;">
+        <form action="/bookings/add" method="POST">
+            <div class="form-group">
+                <label>Select Customer</label>
+                <select name="userId" required>
+                    <% users.forEach(user=> { %>
+                        <option value="<%= user._id %>">
+                            <%= user.name %> (<%= user.email %>)
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Select Car</label>
+                <select name="carId" required>
+                    <% cars.forEach(car=> { %>
+                        <option value="<%= car._id %>" <%=(typeof selectedCarId !=='undefined' &&
+                            selectedCarId==car._id.toString()) ? 'selected' : '' %>>
+                            <%= car.name %> - $<%= car.pricePerDay %>/day (<%= car.status %>)
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" name="endDate" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status">
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Create Booking</button>
+        </form>
+    </div>
+</div>

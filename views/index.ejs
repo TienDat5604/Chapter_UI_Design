@@ -1,0 +1,74 @@
+<div class="header-section">
+    <h1>Welcome back, Admin</h1>
+    <p>Here's what's happening today.</p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Cars</h3>
+        <div class="value">
+            <%= stats.carCount %>
+        </div>
+    </div>
+    <div class="stat-card">
+        <h3>Active Users</h3>
+        <div class="value">
+            <%= stats.userCount %>
+        </div>
+    </div>
+    <div class="stat-card">
+        <h3>Total Bookings</h3>
+        <div class="value">
+            <%= stats.bookingCount %>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2>Recent Bookings</h2>
+        <a href="/bookings" class="btn btn-primary btn-sm">View All</a>
+    </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Car</th>
+                    <th>Dates</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% recentBookings.forEach(booking=> { %>
+                    <tr>
+                        <td>
+                            <div style="font-weight: 500;">
+                                <%= booking.userId ? booking.userId.name : 'Unknown' %>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--secondary);">
+                                <%= booking.userId ? booking.userId.email : '' %>
+                            </div>
+                        </td>
+                        <td>
+                            <%= booking.carId ? booking.carId.name : 'Deleted Car' %>
+                        </td>
+                        <td>
+                            <%= new Date(booking.startDate).toLocaleDateString() %> -
+                                <%= new Date(booking.endDate).toLocaleDateString() %>
+                        </td>
+                        <td>$<%= booking.totalPrice %>
+                        </td>
+                        <td>
+                            <span
+                                class="badge badge-<%= booking.status === 'confirmed' ? 'success' : (booking.status === 'pending' ? 'warning' : 'danger') %>">
+                                <%= booking.status %>
+                            </span>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | Car Rental System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span class="logo-icon">🚗</span>
+                <span class="logo-text">AutoRent</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="<%= title === 'Dashboard' ? 'active' : '' %>">Dashboard</a></li>
+                <li><a href="/cars" class="<%= title.includes('Car') ? 'active' : '' %>">Cars</a></li>
+                <li><a href="/users" class="<%= title.includes('User') ? 'active' : '' %>">Users</a></li>
+                <li><a href="/bookings" class="<%= title.includes('Booking') ? 'active' : '' %>">Bookings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <%- body %>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 AutoRent Management System. Built with EJS & Express.</p>
+    </footer>
+</body>
+</html>

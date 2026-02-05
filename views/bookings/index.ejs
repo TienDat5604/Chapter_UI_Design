@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Booking Records</h2>
+        <a href="/bookings/add" class="btn btn-primary">Create Booking</a>
+    </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Schedule</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% bookings.forEach(booking=> { %>
+                    <tr>
+                        <td>
+                            <strong>
+                                <%= booking.userId ? booking.userId.name : 'N/A' %>
+                            </strong>
+                            <div style="font-size: 0.75rem; color: var(--secondary);">
+                                <%= booking.userId ? booking.userId.email : '' %>
+                            </div>
+                        </td>
+                        <td>
+                            <%= booking.carId ? booking.carId.name : 'Deleted Car' %>
+                        </td>
+                        <td>
+                            <div>
+                                <%= new Date(booking.startDate).toLocaleDateString() %>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--secondary);">to <%= new
+                                    Date(booking.endDate).toLocaleDateString() %>
+                            </div>
+                        </td>
+                        <td><strong>$<%= (booking.totalPrice || 0).toFixed(2) %></strong></td>
+                        <td>
+                            <span
+                                class="badge badge-<%= booking.status === 'confirmed' ? 'success' : (booking.status === 'pending' ? 'warning' : 'danger') %>">
+                                <%= booking.status %>
+                            </span>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

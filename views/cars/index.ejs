@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Car Fleet Management</h2>
+        <a href="/cars/add" class="btn btn-primary">Add New Car</a>
+    </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Car Details</th>
+                    <th>Brand & Model</th>
+                    <th>Price/Day</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% cars.forEach(car=> { %>
+                    <tr>
+                        <td>
+                            <div style="font-weight: 600;">
+                                <%= car.name %>
+                            </div>
+                        </td>
+                        <td>
+                            <%= car.brand %>
+                                <%= car.model %>
+                        </td>
+                        <td>$<%= car.pricePerDay %>
+                        </td>
+                        <td>
+                            <span
+                                class="badge badge-<%= car.status === 'available' ? 'success' : (car.status === 'rented' ? 'warning' : 'danger') %>">
+                                <%= car.status %>
+                            </span>
+                        </td>
+                        <td>
+                            <a href="/bookings/add?carId=<%= car._id %>" class="btn btn-sm"
+                                style="background: var(--success); color: white;">Book</a>
+                            <a href="/cars/edit/<%= car._id %>" class="btn btn-sm btn-primary"
+                                style="background: var(--secondary);">Edit</a>
+                            <a href="/cars/delete/<%= car._id %>" class="btn btn-sm"
+                                style="background: var(--danger); color: white;"
+                                onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
